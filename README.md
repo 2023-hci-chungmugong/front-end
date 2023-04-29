@@ -1,16 +1,10 @@
-# chungmugong_front_end
+# 충무공 프론트엔드
 
-A new Flutter project.
+2023 HCI Term-Project
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+플러터 설치 하십시오.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://brunch.co.kr/@mystoryg/114
+브런치 보고 따라 하십시오.
