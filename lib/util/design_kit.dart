@@ -10,8 +10,9 @@ class DesignKit {
   static const gray = Color.fromARGB(255, 188, 188, 188);
 
   // proportions
+  // figma에 있는 컴포넌트 사이즈를 넣으면 기기에 맞는 비율로 변환합니다.
   static getWidth(context, width) =>
       MediaQuery.of(context).size.width * width / 360;
   static getHeight(context, hegiht) =>
-      MediaQuery.of(context).size.height * hegiht / 360;
+      MediaQuery.of(context).size.height * hegiht / 800;
 }
