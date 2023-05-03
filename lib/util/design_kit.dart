@@ -15,4 +15,6 @@ class DesignKit {
       MediaQuery.of(context).size.width * width / 360;
   static double getHeight(context, hegiht) =>
       MediaQuery.of(context).size.height * hegiht / 800;
+  static double getFontSize(context, width) =>
+      MediaQuery.of(context).size.width * width / 360;
 }
