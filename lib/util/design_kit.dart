@@ -11,10 +11,10 @@ class DesignKit {
 
   // proportions
   // figma에 있는 컴포넌트 사이즈를 넣으면 기기에 맞는 비율로 변환합니다.
-  static double getWidth(context, width) =>
+  static double getWidth(BuildContext context, double width) =>
       MediaQuery.of(context).size.width * width / 360;
-  static double getHeight(context, hegiht) =>
+  static double getHeight(BuildContext context, double hegiht) =>
       MediaQuery.of(context).size.height * hegiht / 800;
-  static double getFontSize(context, width) =>
-      MediaQuery.of(context).size.width * width / 360;
+  static double getFontSize(BuildContext context, double fontSize) =>
+      MediaQuery.of(context).size.width * fontSize / 360;
 }
