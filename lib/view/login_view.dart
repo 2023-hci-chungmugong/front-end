@@ -21,11 +21,17 @@ class LoginView extends StatelessWidget {
             child: Column(
               children: [
                 TextField(
-                  onChanged: (value) => id = value,
+                  onChanged: (value) {
+                    id = value;
+                    print('$id $pw');
+                  },
                   decoration: InputDecoration(hintText: '학번'),
                 ),
                 TextField(
-                  onChanged: (value) => pw = value,
+                  onChanged: (value) {
+                    pw = value;
+                    print('$id $pw');
+                  },
                   decoration: InputDecoration(hintText: '비밀번호'),
                 ),
               ],
