@@ -1,14 +1,21 @@
+import 'dart:developer';
+
 import 'package:chungmugong_front_end/intent/auth.dart';
 import 'package:chungmugong_front_end/view/lobby_view.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    String id = '', pw = '';
+  State<LoginView> createState() => _LoginViewState();
+}
 
+class _LoginViewState extends State<LoginView> {
+  String id = '', pw = '';
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -22,15 +29,13 @@ class LoginView extends StatelessWidget {
               children: [
                 TextField(
                   onChanged: (value) {
-                    id = value;
-                    print('$id $pw');
+                    setState(() => id = value);
                   },
                   decoration: InputDecoration(hintText: '학번'),
                 ),
                 TextField(
                   onChanged: (value) {
-                    pw = value;
-                    print('$id $pw');
+                    setState(() => pw = value);
                   },
                   decoration: InputDecoration(hintText: '비밀번호'),
                 ),
