@@ -21,11 +21,11 @@ class _LobbyBodyState extends State<LobbyBody> {
             SizedBox(height: DesignKit.getHeight(context, 80)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [TableItem('가'), TableItem('나'), TableItem('다')],
+              children: const [TableItem('가'), TableItem('나'), TableItem('다')],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [TableItem('라'), TableItem('마')],
+              children: const [TableItem('라'), TableItem('마')],
             ),
           ],
         ),
@@ -39,6 +39,7 @@ class TableItem extends StatelessWidget {
 
   final String name;
 
+  // TODO: 색깔 및 텍스트 표현
   @override
   Widget build(BuildContext context) {
     return Column(
