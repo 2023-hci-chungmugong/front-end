@@ -1,9 +1,10 @@
 import 'package:chungmugong_front_end/model/abusing.dart';
+import 'package:chungmugong_front_end/model/profile.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:flutter/material.dart';
 
 class AppState extends ChangeNotifier {
-  // 5~9라인 써주면 인스턴스가 Sigletone으로 생성됨
+  // 7~10라인 써주면 인스턴스가 Sigletone으로 생성됨
   static final AppState _instance = AppState._internal();
 
   factory AppState() => _instance;
@@ -16,4 +17,5 @@ class AppState extends ChangeNotifier {
   ReservationForDate reservations = ReservationForDate(DateTime.now());
   List<Abusing> abusingLog = [];
   List<ReservationForUser> myReservations = [];
+  Profile userData = Profile('뀨니언', '201802163');
 }
