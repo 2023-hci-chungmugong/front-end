@@ -13,7 +13,7 @@ class LobbyView extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(DesignKit.getHeight(context, 42)),
         child: AppBar(
-          backgroundColor: DesignKit.mainColor,
+          backgroundColor: DesignKit.mainBlue,
           leading: const SizedBox(),
           title: const BoldText16(
             '2023년 4월 29일 (토)',
