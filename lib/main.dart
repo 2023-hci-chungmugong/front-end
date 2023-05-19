@@ -1,14 +1,19 @@
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/view/login_view.dart';
+import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final WifiIn _wifiIn;
+
+  MyApp({Key? key})
+      : _wifiIn = WifiIn(child: LoginView()),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorSchemeSeed: Color.fromARGB(255, 17, 22, 160),
         ),
-        home: LoginView(),
+        home: _wifiIn,
       ),
     );
   }
