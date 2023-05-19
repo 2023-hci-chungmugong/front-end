@@ -1,10 +1,24 @@
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/view/login_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:logger/logger.dart';
 
-void main() {
+import 'firebase/firebase_firestore.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
+  AppState().saveDataToFirestore();
+  AppState().check();
+
+  var logger = Logger();
+  print("main 입니다.");
+  logger.d("Logger is working!");
 }
 
 class MyApp extends StatelessWidget {
