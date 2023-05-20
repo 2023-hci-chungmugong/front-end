@@ -1,5 +1,6 @@
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
+import 'package:chungmugong_front_end/view/reservation_modal.dart';
 import 'package:flutter/material.dart';
 
 class LobbyBody extends StatefulWidget {
@@ -64,6 +65,17 @@ class TableItem extends StatelessWidget {
                 blurRadius: 2,
               )
             ],
+          ),
+          child: OutlinedButton(
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return ReservationModal();
+                },
+              );
+            },
+            child: null,
           ),
         ),
       ],

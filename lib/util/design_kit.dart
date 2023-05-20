@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DesignKit {
   // colors
-  static const Color mainColor = Color.fromARGB(255, 17, 22, 160);
+  static const Color mainBlue = Color.fromARGB(255, 17, 22, 160);
   static const Color green = Color.fromARGB(255, 162, 255, 171);
   static const Color blue = Color.fromARGB(255, 147, 229, 255);
   static const Color red = Color.fromARGB(255, 254, 161, 161);
