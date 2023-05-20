@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:chungmugong_front_end/intent/auth.dart';
-import 'package:chungmugong_front_end/view/lobby_body.dart';
-import 'package:chungmugong_front_end/view/wifi_in.dart';
+import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/view/lobby_view.dart';
+import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -49,7 +49,7 @@ class _LoginViewState extends State<LoginView> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               fixedSize: Size(130, 40),
-              backgroundColor: Color.fromARGB(255, 17, 22, 160),
+              backgroundColor: DesignKit.mainBlue,
             ),
             onPressed: () {
               if (Auth.auth(id, pw)) {

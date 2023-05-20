@@ -9,27 +9,6 @@ import 'package:network_info_plus/network_info_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:provider/provider.dart';
 
-// import 'package:wifi_flutter/wifi_flutter.dart';
-
-// class WifiIn extends StatelessWidget {
-//   const WifiIn({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Alert Dialog'),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: null,
-//           child: Text('Button'),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class WifiIn extends StatefulWidget {
   final Widget child;
 

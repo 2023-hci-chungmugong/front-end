@@ -1,20 +1,25 @@
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/view/login_view.dart';
-import 'package:chungmugong_front_end/view/wifi_in.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:logger/logger.dart';
 
-void main() {
-  runApp(MyApp());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
+  AppState().saveDataToFirestore();
+  AppState().check();
+
+  var logger = Logger();
+  print("main 입니다.");
+  logger.d("Logger is working!");
 }
 
 class MyApp extends StatelessWidget {
-  final WifiIn _wifiIn;
-
-  MyApp({Key? key})
-      : _wifiIn = WifiIn(child: LoginView()),
-        super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -24,7 +29,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorSchemeSeed: Color.fromARGB(255, 17, 22, 160),
         ),
-        home: _wifiIn,
+        home: LoginView(),
       ),
     );
   }
