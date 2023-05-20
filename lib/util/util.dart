@@ -1,6 +1,9 @@
 String dateTimeToString(DateTime dt) {
   return "${dt.year}년 ${dt.month}월 ${dt.day}일 (${weekDayToString(dt.weekday)})";
 }
+String dateTimeToString2(DateTime dt) {
+  return "${dt.year}/${dt.month}/${dt.day}(${weekDayToString(dt.weekday)})";
+}
 String weekDayToString(int wd) {
   switch(wd) {
     case 1:
