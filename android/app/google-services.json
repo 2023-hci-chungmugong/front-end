@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "486663501064",
+    "project_id": "cmg-reservation",
+    "storage_bucket": "cmg-reservation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486663501064:android:010a86ffa399b3c08ba8bd",
+        "android_client_info": {
+          "package_name": "com.example.chungmugong_front_end"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486663501064-al4ktdicakgte9hb9dnrjci7vhmm29d6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHrZY-eQkm97vKg9hg5oGRZlK9gDEWuhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486663501064-al4ktdicakgte9hb9dnrjci7vhmm29d6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486663501064-gpsu7cme0odmeqll3iksioti8no15i8v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chungmugongFrontEnd"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
