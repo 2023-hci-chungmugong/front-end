@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-import '../firebase_options.dart';
 import '../model/app_state.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -9,8 +7,9 @@ final FirebaseFirestore firestore = FirebaseFirestore.instance;
 class FirebaseManager {
   static Future<void> saveDataToFirestore(AppState appState) async {
     try {
-      print("firebase start");
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
+      String documentId =
+          appState.appDate.toIso8601String().split('T')[0]; // YYYY-MM-DD
 
       // ReservationForDate 컬렉션에 데이터 저장
       final Map<String, dynamic> reservationsData = {};
@@ -20,8 +19,15 @@ class FirebaseManager {
             sectionReservation.reserved.map((time) => time.toString()).toList();
         reservationsData[sectionName.toString()] = reservedList;
       });
-      String documentId =
-          appState.appDate.toIso8601String().split('T')[0]; // YYYY-MM-DD
+      List<int> tmp = [];
+      for (var i = appState.myReservations[0].start;
+          i <= appState.myReservations[0].end;
+          i++) {
+        tmp.add(i);
+      }
+
+      reservationsData[appState.myReservations[0].section.toString()] = tmp;
+
       await firestore
           .collection('ReservationForDate')
           .doc(documentId) // 문서 ID로 날짜를 사용
@@ -35,17 +41,21 @@ class FirebaseManager {
       final Map<String, dynamic> userData = {
         'id': appState.userData.id,
         'name': appState.userData.name,
-        'abusing': {
-          'date': appState.abusingLog[0].date,
-          'content': appState.abusingLog[0].type.toString(),
-        },
-        'section': {
-          'sectionName': appState.myReservations[0].section.toString(),
-          'usingTime': [
-            appState.myReservations[0].start,
-            appState.myReservations[0].end
-          ],
-        }
+        'abusing': [
+          {
+            'date': appState.abusingLog[0].date,
+            'content': appState.abusingLog[0].type.toString(),
+          }
+        ],
+        'section': [
+          {
+            'sectionName': appState.myReservations[0].section.toString(),
+            'usingTime': [
+              appState.myReservations[0].start,
+              appState.myReservations[0].end
+            ],
+          }
+        ]
       };
       await firestore
           .collection('user')
@@ -57,6 +67,7 @@ class FirebaseManager {
   }
 }
 
+// 데이터 확인
 // ReservationForDate 컬렉션의 모든 문서 가져오기
 void fetchReservationForDate() async {
   final QuerySnapshot querySnapshot =
