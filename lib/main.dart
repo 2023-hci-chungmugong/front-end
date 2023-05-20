@@ -1,24 +1,19 @@
 import 'package:chungmugong_front_end/model/app_state.dart';
-import 'package:chungmugong_front_end/util/notification.dart';
 import 'package:chungmugong_front_end/view/login_view.dart';
+import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('app_icon');
-  final InitializationSettings initializationSettings =
-      InitializationSettings(android: initializationSettingsAndroid);
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
-  runApp(const MyApp());
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final WifiIn _wifiIn;
+
+  MyApp({Key? key})
+      : _wifiIn = WifiIn(child: LoginView()),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorSchemeSeed: Color.fromARGB(255, 17, 22, 160),
         ),
-        home: LoginView(),
+        home: _wifiIn,
       ),
     );
   }
