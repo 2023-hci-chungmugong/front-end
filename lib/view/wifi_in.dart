@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
-import 'package:chungmugong_front_end/view/lobby_body.dart';
 import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 // import 'package:wifi_flutter/wifi_flutter.dart';
