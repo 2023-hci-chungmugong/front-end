@@ -1,6 +1,9 @@
+import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
+import 'package:chungmugong_front_end/view/drawer_view.dart';
 import 'package:chungmugong_front_end/view/lobby_body.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -19,18 +22,10 @@ class LobbyView extends StatelessWidget {
             '2023년 4월 29일 (토)',
             textColor: Colors.white,
           ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                'assets/icons/hamburger.svg',
-                width: DesignKit.getWidth(context, 24),
-                height: DesignKit.getHeight(context, 21),
-              ),
-            ),
-          ],
+          actions: [],
         ),
       ),
+      endDrawer: DrawerView(),
       body: LobbyBody(),
     );
   }

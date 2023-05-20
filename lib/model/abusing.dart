@@ -4,7 +4,7 @@ String? getAbusingMessage(AbusingType type) {
   if (type == AbusingType.noshow) {
     return "예약 후 입장하지 않음";
   } else if (type == AbusingType.leave) {
-    return "무한상상공간에서 오래 벗어남";
+    return "입장 후 자리이탈";
   }
   return null;
 }
