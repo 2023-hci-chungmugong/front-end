@@ -27,10 +27,25 @@ class FirebaseManager {
           .doc(documentId) // 문서 ID로 날짜를 사용
           .set(reservationsData);
 
+      // Avaliable 컬렉션에 데이터 저장
+      final Map<String, dynamic> availData = {'time': appState.availableTime};
+      await firestore.collection('available').doc(documentId).set(availData);
+
       // UserData 컬렉션에 데이터 저장
       final Map<String, dynamic> userData = {
-        'name': appState.userData.name,
         'id': appState.userData.id,
+        'name': appState.userData.name,
+        'abusing': {
+          'date': appState.abusingLog[0].date,
+          'content': appState.abusingLog[0].type.toString(),
+        },
+        'section': {
+          'sectionName': appState.myReservations[0].section.toString(),
+          'usingTime': [
+            appState.myReservations[0].start,
+            appState.myReservations[0].end
+          ],
+        }
       };
       await firestore
           .collection('user')
