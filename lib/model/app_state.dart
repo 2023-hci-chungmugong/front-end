@@ -30,7 +30,7 @@ class AppState extends ChangeNotifier {
   Profile userData = Profile('뀨니언', '201802163');
 
   void saveDataToFirestore() {
-    FirebaseManager.initializaFirebase();
+    // FirebaseManager.initializaFirebase();
     FirebaseManager.saveDataToFirestore(this);
   }
 

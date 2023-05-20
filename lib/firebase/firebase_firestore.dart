@@ -1,21 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 
+import '../firebase_options.dart';
 import '../model/app_state.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class FirebaseManager {
-  static Future<void> initializaFirebase() async {
-    // Firebase 앱 초기화
-    try {
-      await Firebase.initializeApp();
-    } catch (e) {
-      print('Error initializing Firebase: $e');
-    }
-  }
-
   static Future<void> saveDataToFirestore(AppState appState) async {
     try {
       print("firebase start");
@@ -29,9 +20,11 @@ class FirebaseManager {
             sectionReservation.reserved.map((time) => time.toString()).toList();
         reservationsData[sectionName.toString()] = reservedList;
       });
+      String documentId =
+          appState.appDate.toIso8601String().split('T')[0]; // YYYY-MM-DD
       await firestore
           .collection('ReservationForDate')
-          .doc(appState.appDate.toString()) // 문서 ID로 날짜를 사용
+          .doc(documentId) // 문서 ID로 날짜를 사용
           .set(reservationsData);
 
       // UserData 컬렉션에 데이터 저장
