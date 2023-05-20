@@ -1,5 +1,6 @@
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/view/login_view.dart';
+import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

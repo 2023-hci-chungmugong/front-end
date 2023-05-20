@@ -1,4 +1,8 @@
+import 'package:chungmugong_front_end/util/design_kit.dart';
+import 'package:chungmugong_front_end/util/styled_component.dart';
+import 'package:chungmugong_front_end/view/lobby_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LobbyView extends StatelessWidget {
   const LobbyView({super.key});
@@ -6,10 +10,28 @@ class LobbyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('2023년 4월 29일 (토)'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(DesignKit.getHeight(context, 42)),
+        child: AppBar(
+          backgroundColor: DesignKit.mainColor,
+          leading: const SizedBox(),
+          title: const BoldText16(
+            '2023년 4월 29일 (토)',
+            textColor: Colors.white,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset(
+                'assets/icons/hamburger.svg',
+                width: DesignKit.getWidth(context, 24),
+                height: DesignKit.getHeight(context, 21),
+              ),
+            ),
+          ],
+        ),
       ),
-      body: Placeholder(),
+      body: LobbyBody(),
     );
   }
 }
