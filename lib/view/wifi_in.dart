@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:chungmugong_front_end/model/app_state.dart';
-// import 'package:chungmugong_front_end/model/reservation.dart';
-import 'package:chungmugong_front_end/util/styled_component.dart';
-import 'package:chungmugong_front_end/view/lobby_body.dart';
+import 'package:chungmugong_front_end/view/wifi_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -21,15 +19,31 @@ class WifiIn extends StatefulWidget {
 class _WifiIn extends State<WifiIn> {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  static const String CMGWifiIP = '10.0.2.16';
+  // static const String CMGWifiBSSID = 'AndroidWifi';
+
   @override
   void initState() {
     super.initState();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
       if (result == ConnectivityResult.wifi) {
-        _showWifiAlertDialog();
+        _connectCMGWIFI();
       }
     });
+  }
+
+  void _connectCMGWIFI() async {
+    final info = NetworkInfo();
+    final wifiname = await info.getWifiBSSID(); // "AndroidWifi"
+    final wifiIP = await info.getWifiIP();
+    if (wifiIP == CMGWifiIP) {
+      showDialog<void>(
+          context: context,
+          builder: (context) {
+            return WifiModal();
+          });
+    }
   }
 
   @override
@@ -47,46 +61,5 @@ class _WifiIn extends State<WifiIn> {
         );
       },
     );
-  }
-
-  void _showWifiAlertDialog() async {
-    final info = NetworkInfo();
-    // final wifiname = await info.getWifiName(); // "AndroidWifi"
-    final wifiIP = await info.getWifiIP(); // "10.0.2.16"
-    if (wifiIP == '10.0.2.16') {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            var appState = context.watch<AppState>();
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              //Dialog Main Title
-              title: Column(
-                children: <Widget>[
-                  new Text("Wifi In"),
-                ],
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "입장하시겠습니까?",
-                  ),
-                ],
-              ),
-              actions: <Widget>[
-                new TextButton(
-                  child: new Text("입장"),
-                  onPressed: () {
-                    appState.notifyListeners();
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            );
-          });
-    }
   }
 }
