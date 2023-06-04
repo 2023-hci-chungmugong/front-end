@@ -98,3 +98,21 @@ class PlainText14 extends StatelessWidget {
     );
   }
 }
+
+class PlainText10 extends StatelessWidget {
+  const PlainText10(this.data, {super.key, this.textColor});
+
+  final String data;
+  final Color? textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      data,
+      style: TextStyle(
+        fontSize: DesignKit.getFontSize(context, 10),
+        color: textColor ?? Colors.black,
+      ),
+    );
+  }
+}
