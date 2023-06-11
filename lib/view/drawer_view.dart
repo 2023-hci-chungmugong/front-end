@@ -4,6 +4,7 @@ import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/util/util.dart';
+import 'package:chungmugong_front_end/view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -185,12 +186,40 @@ class _DrawerViewState extends State<DrawerView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    'assets/icons/logout.svg',
-                    width: DesignKit.getWidth(context, 32),
-                    height: DesignKit.getHeight(context, 40),
-                  ),
-                  BoldText16('로그아웃')
+                  GestureDetector(
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/logout.svg',
+                          width: DesignKit.getWidth(context, 32),
+                          height: DesignKit.getHeight(context, 40),
+                        ),
+                        BoldText16('로그아웃')
+                      ],
+                    ),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                content: PlainText14('정말 로그아웃 하시겠습니까?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => LoginView(),
+                                      ));
+                                    },
+                                    child: const Text('네'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('아니요'),
+                                  ),
+                                ],
+                              ));
+                    },
+                  )
                 ],
               )),
         ],
@@ -265,7 +294,7 @@ class _reservationSectionState extends State<reservationSection> {
                 height: DesignKit.getHeight(context, 20),
               ),
               BoldText14("<${widget.sectionName}>"),
-              BoldText14("${widget.start}:00 ~ ${widget.end}:00")
+              BoldText14("${widget.start}:00 ~ ${(widget.end) + 1}:00")
             ],
           ),
           SizedBox(

@@ -9,21 +9,23 @@ class LobbyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(DesignKit.getHeight(context, 42)),
-        child: AppBar(
-          backgroundColor: DesignKit.mainBlue,
-          leading: const SizedBox(),
-          title: const BoldText16(
-            '2023년 4월 29일 (토)',
-            textColor: Colors.white,
+    return WillPopScope(
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(DesignKit.getHeight(context, 42)),
+            child: AppBar(
+              backgroundColor: DesignKit.mainBlue,
+              leading: const SizedBox(),
+              title: const BoldText16(
+                '2023년 4월 29일 (토)',
+                textColor: Colors.white,
+              ),
+              actions: [],
+            ),
           ),
-          actions: [],
+          endDrawer: DrawerView(),
+          body: LobbyBody(),
         ),
-      ),
-      endDrawer: DrawerView(),
-      body: LobbyBody(),
-    );
+        onWillPop: () async=>false);
   }
 }
