@@ -1,3 +1,4 @@
+import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../model/app_state.dart';
@@ -91,4 +92,46 @@ Future<DocumentSnapshot<Object?>> getUserData(String id) async {
       await FirebaseFirestore.instance.collection('user').doc(id).get();
 
   return document;
+}
+
+Future<void> updateReservationForDate(
+  SectionName sectionName,
+  List<int> selected,
+) async {
+  AppState appState = AppState();
+  String documentId = appState.appDate.toIso8601String().split('T')[0];
+
+  final Map<String, dynamic> reservationData = {};
+  reservationData[sectionName.toString()] = {
+    ...selected,
+    ...appState.reservations.reservations[sectionName]!.reserved
+  };
+  print(sectionName.toString());
+  print(appState.reservations.reservations[SectionName.na]!.reserved);
+  print(reservationData);
+  await firestore
+      .collection('ReservationForDate')
+      .doc(documentId)
+      .update(reservationData);
+}
+
+Future<void> updateUserReservation(
+  SectionName sectionName,
+  List<int> selected,
+) async {
+  AppState appState = AppState();
+  String documentId = appState.userData.id.toString();
+
+  Map<String, dynamic> reservation = {
+    'reservations': FieldValue.arrayUnion([
+      {
+        'sectionName': sectionName.toString(),
+        'startTime': selected[0],
+        'endTime': selected[selected.length - 1],
+        'status': ReservationStatus.reserved.toString(),
+      }
+    ])
+  };
+
+  await firestore.collection('user').doc(documentId).update(reservation);
 }
