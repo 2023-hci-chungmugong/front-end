@@ -1,15 +1,10 @@
-import 'dart:developer';
-
 import 'package:chungmugong_front_end/intent/auth.dart';
-import 'package:chungmugong_front_end/model/app_state.dart';
-import 'package:chungmugong_front_end/model/reservation.dart';
-import 'package:chungmugong_front_end/view/lobby_body.dart';
+import 'package:chungmugong_front_end/intent/fetch_data.dart';
+import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/view/lobby_view.dart';
-import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -50,40 +45,41 @@ class _LoginViewState extends State<LoginView> {
                   onChanged: (value) {
                     setState(() => pw = value);
                   },
+                  obscureText: true,
                   decoration: InputDecoration(hintText: '비밀번호'),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 64),
+          const SizedBox(height: 64),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               fixedSize: Size(130, 40),
               backgroundColor: DesignKit.mainBlue,
             ),
             onPressed: () {
-              if (Auth.auth(id, pw)) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => WifiIn(
-                    child: LobbyView(),
-                  ),
-                ));
-              } else {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    content: Text('학번과 비밀번호를 확인하세요'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
-              }
+              Auth.auth(id, pw).then((result) {
+                if (result) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LobbyView(),
+                  ));
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      content: const PlainText14('학번과 비밀번호를 확인하세요'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              });
             },
             child: const Text(
               '로그인',

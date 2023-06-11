@@ -1,23 +1,20 @@
 import 'package:chungmugong_front_end/intent/fetch_data.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/view/login_view.dart';
-import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:logger/logger.dart';
 
-import 'firebase_options.dart';
-
 void main() async {
   var logger = Logger();
+  logger.d("Logger is working!");
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
-  FetchAppData.initializeAppData();
+  await FetchAppData.initializeAppData();
 
-  logger.d("Logger is working!");
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

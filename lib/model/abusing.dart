@@ -1,4 +1,13 @@
-enum AbusingType { noshow, leave }
+enum AbusingType { noshow, leave, error }
+
+AbusingType stringToAbusingType(String value) {
+  if (value == "AbusingType.noshow") {
+    return AbusingType.noshow;
+  } else if (value == "AbusingType.leave") {
+    return AbusingType.leave;
+  }
+  return AbusingType.error;
+}
 
 String? getAbusingMessage(AbusingType type) {
   if (type == AbusingType.noshow) {

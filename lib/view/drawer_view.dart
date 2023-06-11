@@ -25,9 +25,14 @@ class _DrawerViewState extends State<DrawerView> {
       child: Column(
         children: [
           SizedBox(
-            height: DesignKit.getHeight(context, 260),
+            height: DesignKit.getHeight(context, 280),
             width: DesignKit.getWidth(context, 400),
             child: DrawerHeader(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: Divider.createBorderSide(context,color:DesignKit.gray,width: 1.0)
+                )
+              ),
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

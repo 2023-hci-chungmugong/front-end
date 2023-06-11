@@ -18,26 +18,7 @@ class AppState extends ChangeNotifier {
   // 아래 변수는 추후 Firebase와 연결하여 초기화 되어야함
   ReservationForDate reservations = ReservationForDate(DateTime.now());
   List<int> availableTime = SectionReservation.defaultavailable;
-  List<Abusing> abusingLog = [Abusing(DateTime.now(), AbusingType.noshow)];
-  List<ReservationForUser> myReservations = [
-    ReservationForUser(
-        date: DateTime.now(),
-        section: SectionName.na,
-        start: 8,
-        end: 12,
-        status: ReservationStatus.using),
-    ReservationForUser(
-        date: DateTime.now(),
-        section: SectionName.na,
-        start: 14,
-        end: 16,
-        status: ReservationStatus.reserved),
-    ReservationForUser(
-        date: DateTime.now(),
-        section: SectionName.na,
-        start: 16,
-        end: 18,
-        status: ReservationStatus.reserved)
-  ];
+  List<Abusing> abusingLog = [];
+  List<ReservationForUser> myReservations = [];
   Profile userData = Profile('None', '200000000');
 }

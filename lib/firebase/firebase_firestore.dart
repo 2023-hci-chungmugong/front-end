@@ -86,10 +86,9 @@ Future<DocumentSnapshot> getTodayAvailable() async {
 }
 
 // user 컬렉션의 모든 문서 가져오기
-Future<List<DocumentSnapshot>> fetchUserData() async {
-  final QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection('user').get();
-  final List<DocumentSnapshot> documents = querySnapshot.docs;
+Future<DocumentSnapshot<Object?>> getUserData(String id) async {
+  final DocumentSnapshot document =
+      await FirebaseFirestore.instance.collection('user').doc(id).get();
 
-  return documents;
+  return document;
 }
