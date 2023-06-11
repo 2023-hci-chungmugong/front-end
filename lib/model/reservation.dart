@@ -77,10 +77,6 @@ class SectionReservation {
         return true;
       }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> a02a757f4b27b5e5b37d5f9b84792f52986c7ef1
     return false;
   }
 

@@ -1,10 +1,7 @@
 import 'package:chungmugong_front_end/model/abusing.dart';
 import 'package:chungmugong_front_end/model/profile.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
-<<<<<<< HEAD
-=======
 import 'package:firebase_core/firebase_core.dart';
->>>>>>> a02a757f4b27b5e5b37d5f9b84792f52986c7ef1
 import 'package:flutter/material.dart';
 
 import '../firebase/firebase_firestore.dart';
@@ -25,7 +22,7 @@ class AppState extends ChangeNotifier {
   List<ReservationForUser> myReservations = [
     ReservationForUser(
         date: DateTime.now(),
-        section: SectionName.ga,
+        section: SectionName.na,
         start: 8,
         end: 12,
         status: ReservationStatus.using)

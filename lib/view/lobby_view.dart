@@ -19,35 +19,16 @@ class LobbyView extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(DesignKit.getHeight(context, 42)),
         child: AppBar(
-<<<<<<< HEAD
-          backgroundColor: DesignKit.mainColor,
-=======
           backgroundColor: DesignKit.mainBlue,
->>>>>>> a02a757f4b27b5e5b37d5f9b84792f52986c7ef1
           leading: const SizedBox(),
           title: const BoldText16(
             '2023년 4월 29일 (토)',
             textColor: Colors.white,
           ),
-<<<<<<< HEAD
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                'assets/icons/hamburger.svg',
-                width: DesignKit.getWidth(context, 24),
-                height: DesignKit.getHeight(context, 21),
-              ),
-            ),
-          ],
-        ),
-      ),
-=======
           actions: [],
         ),
       ),
       endDrawer: DrawerView(),
->>>>>>> a02a757f4b27b5e5b37d5f9b84792f52986c7ef1
       body: LobbyBody(),
     );
   }

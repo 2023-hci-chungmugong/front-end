@@ -5,6 +5,7 @@ import 'package:chungmugong_front_end/view/lobby_body.dart';
 import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/view/lobby_view.dart';
+import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
