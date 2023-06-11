@@ -16,6 +16,8 @@ void main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
   FetchAppData.initializeAppData();
+  // 더미로 채승규 로그인
+  FetchAppData.updateUserData('201802163');
 
   logger.d("Logger is working!");
 }

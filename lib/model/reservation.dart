@@ -3,15 +3,15 @@ enum SectionName { ga, na, da, ra, ma }
 
 // '가', '나'와 같은 자리명을 enum으로 변환
 SectionName? stringToSectionName(String value) {
-  if (value == '가') {
+  if (value == '가' || value == 'SectionName.ga') {
     return SectionName.ga;
-  } else if (value == '나') {
+  } else if (value == '나' || value == 'SectionName.na') {
     return SectionName.na;
-  } else if (value == '다') {
+  } else if (value == '다' || value == 'SectionName.da') {
     return SectionName.da;
-  } else if (value == '라') {
+  } else if (value == '라' || value == 'SectionName.ra') {
     return SectionName.ra;
-  } else if (value == '마') {
+  } else if (value == '마' || value == 'SectionName.ma') {
     return SectionName.ma;
   }
 
@@ -131,6 +131,19 @@ class ReservationForDate {
 
 // 예약의 상태 enum으로 나열
 enum ReservationStatus { reserved, canceled, using, end }
+
+ReservationStatus? stringToReservationStatus(String value) {
+  if (value == "ReservationStatus.reserved") {
+    return ReservationStatus.reserved;
+  } else if (value == "ReservationStatus.canceled") {
+    return ReservationStatus.canceled;
+  } else if (value == "ReservationStatus.using") {
+    return ReservationStatus.using;
+  } else if (value == "ReservationStatus.end") {
+    return ReservationStatus.end;
+  }
+  return null;
+}
 
 // 유저의 예약 정보를 관리하는 클래스
 class ReservationForUser {

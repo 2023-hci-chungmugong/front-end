@@ -1,5 +1,7 @@
 import 'package:chungmugong_front_end/firebase/firebase_firestore.dart';
+import 'package:chungmugong_front_end/model/abusing.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
+import 'package:chungmugong_front_end/model/profile.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -38,8 +40,42 @@ class FetchAppData {
     // print(appState.reservations.reservations[SectionName.na]!.reserved);
   }
 
-  static void updateAppData() {
-    getTodayReservationForDate();
-    fetchUserData();
+  static Future<void> updateUserData(String id) async {
+    AppState appState = AppState();
+
+    DocumentSnapshot userData = await getUserData(id);
+
+    // print("sDF");
+    Map<String, dynamic> data = userData.data() as Map<String, dynamic>;
+    List<dynamic> abusing = data['abusing'];
+    int microTime = abusing[0]['date'].microsecondsSinceEpoch;
+
+    appState.abusingLog.add(Abusing(
+        DateTime.fromMicrosecondsSinceEpoch(microTime),
+        stringToAbusingType(abusing[0]['content'])!));
+
+    // print(appState.abusingLog[0].date);
+
+    appState.userData = Profile(data['name'], data['id']);
+
+    // print(appState.userData.name);
+
+    List<dynamic> reservations = data['reservations'];
+    for (var reservation in reservations) {
+      appState.myReservations.add(ReservationForUser(
+        date: DateTime.now(),
+        section: stringToSectionName(reservation['sectionName'])!,
+        start: reservation['startTime'],
+        end: reservation['endTime'],
+        status: stringToReservationStatus(reservation['status'])!,
+      ));
+    }
+
+    // print(appState.myReservations[0].end);
   }
+
+  // static void updateAppData() {
+  //   getTodayReservationForDate();
+  //   getUserData();
+  // }
 }
