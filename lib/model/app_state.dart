@@ -27,15 +27,5 @@ class AppState extends ChangeNotifier {
         end: 12,
         status: ReservationStatus.using)
   ];
-  Profile userData = Profile('뀨니언', '201802163');
-
-  void saveDataToFirestore() {
-    // FirebaseManager.initializaFirebase();
-    FirebaseManager.saveDataToFirestore(this);
-  }
-
-  void check() {
-    fetchReservationForDate();
-    fetchUserData();
-  }
+  Profile userData = Profile('None', '200000000');
 }

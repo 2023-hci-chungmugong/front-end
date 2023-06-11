@@ -71,7 +71,7 @@ class TableItem extends StatelessWidget {
               showDialog<void>(
                 context: context,
                 builder: (context) {
-                  return ReservationModal();
+                  return ReservationModal(name: name);
                 },
               );
             },

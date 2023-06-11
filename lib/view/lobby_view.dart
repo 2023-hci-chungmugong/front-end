@@ -1,14 +1,8 @@
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/view/lobby_body.dart';
-import 'package:chungmugong_front_end/model/app_state.dart';
-import 'package:chungmugong_front_end/util/design_kit.dart';
-import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/view/drawer_view.dart';
-import 'package:chungmugong_front_end/view/lobby_body.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class LobbyView extends StatelessWidget {
   const LobbyView({super.key});

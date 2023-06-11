@@ -69,25 +69,27 @@ class FirebaseManager {
 
 // 데이터 확인
 // ReservationForDate 컬렉션의 모든 문서 가져오기
-void fetchReservationForDate() async {
+Future<DocumentSnapshot> getTodayReservationForDate() async {
   final QuerySnapshot querySnapshot =
       await FirebaseFirestore.instance.collection('ReservationForDate').get();
   final List<DocumentSnapshot> documents = querySnapshot.docs;
 
-  for (DocumentSnapshot document in documents) {
-    print('Document ID: ${document.id}');
-    print('Data: ${document.data()}');
-  }
+  return documents[documents.length - 1];
+}
+
+Future<DocumentSnapshot> getTodayAvailable() async {
+  final QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection('available').get();
+  final List<DocumentSnapshot> documents = querySnapshot.docs;
+
+  return documents[documents.length - 1];
 }
 
 // user 컬렉션의 모든 문서 가져오기
-void fetchUserData() async {
+Future<List<DocumentSnapshot>> fetchUserData() async {
   final QuerySnapshot querySnapshot =
       await FirebaseFirestore.instance.collection('user').get();
   final List<DocumentSnapshot> documents = querySnapshot.docs;
 
-  for (DocumentSnapshot document in documents) {
-    print('Document ID: ${document.id}');
-    print('Data: ${document.data()}');
-  }
+  return documents;
 }
