@@ -25,7 +25,19 @@ class AppState extends ChangeNotifier {
         section: SectionName.na,
         start: 8,
         end: 12,
-        status: ReservationStatus.using)
+        status: ReservationStatus.using),
+    ReservationForUser(
+        date: DateTime.now(),
+        section: SectionName.na,
+        start: 14,
+        end: 16,
+        status: ReservationStatus.reserved),
+    ReservationForUser(
+        date: DateTime.now(),
+        section: SectionName.na,
+        start: 16,
+        end: 18,
+        status: ReservationStatus.reserved)
   ];
   Profile userData = Profile('None', '200000000');
 }

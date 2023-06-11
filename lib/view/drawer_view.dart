@@ -35,7 +35,7 @@ class _DrawerViewState extends State<DrawerView> {
                 BoldText16(appState.userData.id),
                 BoldText16(appState.userData.name),
                 SizedBox(
-                  height: DesignKit.getHeight(context, 20),
+                  height: DesignKit.getHeight(context, 10),
                 ),
                 GestureDetector(
                     onTap: () {
@@ -171,21 +171,20 @@ class _DrawerViewState extends State<DrawerView> {
                           width: DesignKit.getWidth(context, 1),
                           color: DesignKit.gray))),
               child: DrawerReservationSection()),
-          SizedBox(
-            height: DesignKit.getHeight(context, 300),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/logout.svg',
-                width: DesignKit.getWidth(context, 32),
-                height: DesignKit.getHeight(context, 40),
-              ),
-              BoldText16('로그아웃')
-            ],
-          )
+          Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/logout.svg',
+                    width: DesignKit.getWidth(context, 32),
+                    height: DesignKit.getHeight(context, 40),
+                  ),
+                  BoldText16('로그아웃')
+                ],
+              )),
         ],
       ),
     );
@@ -206,31 +205,62 @@ class DrawerReservationSection extends StatelessWidget {
               BoldText16('예약 정보가 없습니다.'),
             ],
           )
-        : Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BoldText14(dateTimeToString(appState.myReservations[0].date)),
-                  SizedBox(
-                    height: DesignKit.getHeight(context, 20),
-                  ),
-                  BoldText14(
-                      "<${sectionNameToString(appState.myReservations[0].section)}>"),
-                  BoldText14(
-                      "${appState.myReservations[0].start}:00 ~ ${appState.myReservations[0].end}:00")
-                ],
-              ),
-              SizedBox(
-                width: DesignKit.getWidth(context, 50),
-              ),
-              SvgPicture.asset(
-                'assets/icons/cancel.svg',
-                width: DesignKit.getWidth(context, 35),
-                height: DesignKit.getHeight(context, 35),
-              )
-            ],
+        : Column(
+            children: appState.myReservations
+                .map<reservationSection>((ReservationForUser e) =>
+                    (reservationSection(
+                        reserveDate: dateTimeToString(e.date),
+                        sectionName: sectionNameToString(e.section),
+                        start: e.start,
+                        end: e.end)))
+                .toList(),
           );
+  }
+}
+
+class reservationSection extends StatelessWidget {
+  const reservationSection(
+      {super.key,
+      required this.reserveDate,
+      required this.sectionName,
+      required this.start,
+      required this.end});
+
+  final String reserveDate;
+  final String sectionName;
+  final int start;
+  final int end;
+
+  @override
+  Widget build(BuildContext context) {
+    return (Column(children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BoldText14(reserveDate),
+              SizedBox(
+                height: DesignKit.getHeight(context, 20),
+              ),
+              BoldText14("<$sectionName>"),
+              BoldText14("$start:00 ~ $end:00")
+            ],
+          ),
+          SizedBox(
+            width: DesignKit.getWidth(context, 50),
+          ),
+          SvgPicture.asset(
+            'assets/icons/cancel.svg',
+            width: DesignKit.getWidth(context, 35),
+            height: DesignKit.getHeight(context, 35),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: DesignKit.getHeight(context, 20),
+      ),
+    ]));
   }
 }
