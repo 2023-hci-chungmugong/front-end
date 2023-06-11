@@ -48,12 +48,13 @@ class FetchAppData {
     // print("sDF");
     Map<String, dynamic> data = userData.data() as Map<String, dynamic>;
     List<dynamic> abusing = data['abusing'];
-    int microTime = abusing[0]['date'].microsecondsSinceEpoch;
+    for (var ab in abusing) {
+      int microTime = (ab['date'] as Timestamp).microsecondsSinceEpoch;
 
-    appState.abusingLog.add(Abusing(
-        DateTime.fromMicrosecondsSinceEpoch(microTime),
-        stringToAbusingType(abusing[0]['content'])!));
-
+      appState.abusingLog.add(Abusing(
+          DateTime.fromMicrosecondsSinceEpoch(microTime),
+          stringToAbusingType(ab['content'])!));
+    }
     // print(appState.abusingLog[0].date);
 
     appState.userData = Profile(data['name'], data['id']);

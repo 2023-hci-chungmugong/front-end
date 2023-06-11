@@ -1,8 +1,17 @@
+import 'package:chungmugong_front_end/firebase/firebase_firestore.dart';
+import 'package:chungmugong_front_end/intent/fetch_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Auth {
-  static bool auth(String id, String pw) {
-    // TODO: 포털 로그인시스템 연동하기
-    // 학번과 비번은 현재 1111임.
-    if (id == '1111' && pw == '1111') return true;
+  static Future<bool> auth(String id, String pw) async {
+    // ID와 PW는 같음
+    if (id == pw && id[0] == '2' && id[1] == '0') {
+      DocumentSnapshot<Object?> userData = await getUserData(id);
+      if (userData.data() != null) {
+        await FetchAppData.updateUserData(id);
+        return true;
+      }
+    }
     return false;
   }
 }
