@@ -77,7 +77,6 @@ class SectionReservation {
         return true;
       }
     }
-
     return false;
   }
 

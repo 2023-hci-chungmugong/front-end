@@ -1,13 +1,15 @@
 import 'dart:developer';
 
 import 'package:chungmugong_front_end/intent/auth.dart';
+import 'package:chungmugong_front_end/view/lobby_body.dart';
+import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/view/lobby_view.dart';
+import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
-
   @override
   State<LoginView> createState() => _LoginViewState();
 }
@@ -54,7 +56,9 @@ class _LoginViewState extends State<LoginView> {
             onPressed: () {
               if (Auth.auth(id, pw)) {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => LobbyView(),
+                  builder: (context) => WifiIn(
+                    child: LobbyView(),
+                  ),
                 ));
               } else {
                 showDialog(

@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '486663501064',
     projectId: 'cmg-reservation',
     storageBucket: 'cmg-reservation.appspot.com',
-    iosClientId: '486663501064-gpsu7cme0odmeqll3iksioti8no15i8v.apps.googleusercontent.com',
+    iosClientId:
+        '486663501064-gpsu7cme0odmeqll3iksioti8no15i8v.apps.googleusercontent.com',
     iosBundleId: 'com.example.chungmugongFrontEnd',
   );
 }

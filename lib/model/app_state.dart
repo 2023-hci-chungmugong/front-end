@@ -22,7 +22,7 @@ class AppState extends ChangeNotifier {
   List<ReservationForUser> myReservations = [
     ReservationForUser(
         date: DateTime.now(),
-        section: SectionName.ga,
+        section: SectionName.na,
         start: 8,
         end: 12,
         status: ReservationStatus.using)

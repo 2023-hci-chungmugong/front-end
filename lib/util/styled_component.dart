@@ -98,6 +98,7 @@ class PlainText14 extends StatelessWidget {
     );
   }
 }
+
 class PlainText10 extends StatelessWidget {
   const PlainText10(this.data, {super.key, this.textColor});
 

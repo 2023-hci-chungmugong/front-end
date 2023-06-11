@@ -53,50 +53,71 @@ class _DrawerViewState extends State<DrawerView> {
                                     height: DesignKit.getHeight(context, 140),
                                     child: Column(
                                       children: [
-                                        (appState.abusingLog.length>0 ?
-                                        PlainText14(
-                                            "${getAbusingMessage(appState.abusingLog[0].type)} - ${dateTimeToString2(appState.abusingLog[0].date)}") : 
-                                        PlainText14('첫 번째 부정 이용이 없습니다.',textColor: DesignKit.gray,)),
-                                        SizedBox(height: DesignKit.getHeight(context, 15)),
-                                        (appState.abusingLog.length>1 ?
-                                        PlainText14(
-                                            "${getAbusingMessage(appState.abusingLog[1].type)} - ${dateTimeToString2(appState.abusingLog[1].date)}") :
-                                        PlainText14('두 번째 부정 이용이 없습니다.',textColor: DesignKit.gray,)),
-                                        SizedBox(height: DesignKit.getHeight(context, 15)),
-                                        (appState.abusingLog.length>2 ?
-                                        PlainText14(
-                                            "${getAbusingMessage(appState.abusingLog[2].type)} - ${dateTimeToString2(appState.abusingLog[2].date)}") :
-                                        PlainText14('세 번째 부정 이용이 없습니다.',textColor: DesignKit.gray,)),
-
+                                        (appState.abusingLog.length > 0
+                                            ? PlainText14(
+                                                "${getAbusingMessage(appState.abusingLog[0].type)} - ${dateTimeToString2(appState.abusingLog[0].date)}")
+                                            : PlainText14(
+                                                '첫 번째 부정 이용이 없습니다.',
+                                                textColor: DesignKit.gray,
+                                              )),
+                                        SizedBox(
+                                            height: DesignKit.getHeight(
+                                                context, 15)),
+                                        (appState.abusingLog.length > 1
+                                            ? PlainText14(
+                                                "${getAbusingMessage(appState.abusingLog[1].type)} - ${dateTimeToString2(appState.abusingLog[1].date)}")
+                                            : PlainText14(
+                                                '두 번째 부정 이용이 없습니다.',
+                                                textColor: DesignKit.gray,
+                                              )),
+                                        SizedBox(
+                                            height: DesignKit.getHeight(
+                                                context, 15)),
+                                        (appState.abusingLog.length > 2
+                                            ? PlainText14(
+                                                "${getAbusingMessage(appState.abusingLog[2].type)} - ${dateTimeToString2(appState.abusingLog[2].date)}")
+                                            : PlainText14(
+                                                '세 번째 부정 이용이 없습니다.',
+                                                textColor: DesignKit.gray,
+                                              )),
                                       ],
-
                                     )),
                                 actions: [
-
                                   GestureDetector(
-                                    onTap:(){
-                                      showDialog(context: context, builder: (BuildContext context) => AlertDialog(
-                                        title: Text(
-                                          '패널티란?',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontWeight: FontWeight.w700),
-                                        ),
-                                        content: PlainText14('패널티는 3회 부정이용 시 3일 간 무한상상공간을 사용할 수 없게 하는 시스템입니다. '
-                                            '부정이용은 예약 후 입장하지 않거나, 자리를 오래 비우는 것을 의미합니다. 패널티를 받았다면 부정이용 정보는 초기화됩니다.'),
-                                      ));
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                                title: Text(
+                                                  '패널티란?',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                                content: PlainText14(
+                                                    '패널티는 3회 부정이용 시 3일 간 무한상상공간을 사용할 수 없게 하는 시스템입니다. '
+                                                    '부정이용은 예약 후 입장하지 않거나, 자리를 오래 비우는 것을 의미합니다. 패널티를 받았다면 부정이용 정보는 초기화됩니다.'),
+                                              ));
                                     },
                                     child: Center(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          PlainText10('세번 부정 이용 시 패널티가 부과됩니다.',textColor: DesignKit.gray,),
-                                          PlainText10('패널티가 무엇입니까?',textColor: DesignKit.gray,)
+                                          PlainText10(
+                                            '세번 부정 이용 시 패널티가 부과됩니다.',
+                                            textColor: DesignKit.gray,
+                                          ),
+                                          PlainText10(
+                                            '패널티가 무엇입니까?',
+                                            textColor: DesignKit.gray,
+                                          )
                                         ],
                                       ),
-
                                     ),
                                   )
-
                                 ],
                               ));
                     },
