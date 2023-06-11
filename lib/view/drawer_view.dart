@@ -197,26 +197,27 @@ class _DrawerViewState extends State<DrawerView> {
                         BoldText16('로그아웃')
                       ],
                     ),
-                    onTap:  () {
+                    onTap: () {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            content: PlainText14('정말 로그아웃 하시겠습니까?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => LoginView(),
-                                  ));
-                                },
-                                child: const Text('네'),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text('아니요'),
-                              ),
-                            ],
-                          ));
+                                content: PlainText14('정말 로그아웃 하시겠습니까?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => LoginView(),
+                                      ));
+                                    },
+                                    child: const Text('네'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('아니요'),
+                                  ),
+                                ],
+                              ));
                     },
                   )
                 ],
@@ -307,8 +308,8 @@ class _reservationSectionState extends State<reservationSection> {
                         content: PlainText14('해당 예약을 정말 취소하시겠습니까?'),
                         actions: [
                           TextButton(
-                            onPressed: () {
-                              cancelReservation(widget.idx);
+                            onPressed: () async {
+                              await cancelReservation(widget.idx);
                               Navigator.pop(context);
                             },
                             child: const Text('네'),

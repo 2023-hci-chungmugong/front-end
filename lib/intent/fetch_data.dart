@@ -48,12 +48,12 @@ class FetchAppData {
     // print("sDF");
     Map<String, dynamic> data = userData.data() as Map<String, dynamic>;
     List<dynamic> abusing = data['abusing'];
+    appState.abusingLog.clear();
     for (var ab in abusing) {
       int microTime = (ab['date'] as Timestamp).microsecondsSinceEpoch;
-      AbusingType abType =  stringToAbusingType(ab['content']);
-        appState.abusingLog.add(Abusing(
-            DateTime.fromMicrosecondsSinceEpoch(microTime),
-           abType));
+      AbusingType abType = stringToAbusingType(ab['content']);
+      appState.abusingLog
+          .add(Abusing(DateTime.fromMicrosecondsSinceEpoch(microTime), abType));
       print(stringToAbusingType(ab['content']).runtimeType);
     }
     print(appState.abusingLog);
