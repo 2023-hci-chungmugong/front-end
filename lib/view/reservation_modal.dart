@@ -1,10 +1,15 @@
+import 'package:chungmugong_front_end/model/app_state.dart';
+import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class ReservationModal extends StatefulWidget {
-  const ReservationModal({super.key});
+  final String name;
+
+  const ReservationModal({super.key, required this.name});
 
   @override
   State<ReservationModal> createState() => _ReservationModalState();
@@ -15,6 +20,8 @@ class _ReservationModalState extends State<ReservationModal> {
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<AppState>();
+
     return Center(
       child: Container(
         width: DesignKit.getWidth(context, 300),
@@ -58,8 +65,9 @@ class _ReservationModalState extends State<ReservationModal> {
             ),
             // TODO: 아래는 더미 데이터
             PeriodGrid(
-              avaliable: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-              reserved: [16, 17],
+              avaliable: appState.availableTime,
+              reserved: appState.reservations
+                  .reservations[stringToSectionName(widget.name)]!.reserved,
               clicked: clicked,
             ),
             Container(

@@ -3,8 +3,6 @@ import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/util/util.dart';
-import 'package:chungmugong_front_end/view/login_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
