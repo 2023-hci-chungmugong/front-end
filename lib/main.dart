@@ -16,6 +16,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
   FetchAppData.initializeAppData();
+  FetchAppData.updateUserData('201802163');
 
   logger.d("Logger is working!");
 }

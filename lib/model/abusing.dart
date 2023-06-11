@@ -1,5 +1,14 @@
 enum AbusingType { noshow, leave }
 
+AbusingType? stringToAbusingType(String value) {
+  if (value == "AbusingType.noshow") {
+    return AbusingType.noshow;
+  } else if (value == "AbusingType.leave") {
+    return AbusingType.leave;
+  }
+  return null;
+}
+
 String? getAbusingMessage(AbusingType type) {
   if (type == AbusingType.noshow) {
     return "예약 후 입장하지 않음";
