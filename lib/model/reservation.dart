@@ -35,12 +35,12 @@ String sectionNameToString(SectionName value) {
 
 // 자리 하나의 예약을 관리하는 클래스
 class SectionReservation {
-  final List<int> avaliable;
+  final List<int> available;
   final List<int> reserved = [];
 
-  SectionReservation(this.avaliable);
+  SectionReservation(this.available);
 
-  static const List<int> defaultAvaliable = [
+  static const List<int> defaultavailable = [
     8,
     9,
     10,
@@ -52,7 +52,7 @@ class SectionReservation {
     16,
     17
   ];
-  static const List<int> testPeriodAvaliable = [
+  static const List<int> testPeriodavailable = [
     8,
     9,
     10,
@@ -71,7 +71,7 @@ class SectionReservation {
 
   // 1시간 단위 예약에 사용하는 함수
   bool reserve(int time) {
-    if (avaliable.contains(time)) {
+    if (available.contains(time)) {
       if (!reserved.contains(time)) {
         reserved.add(time);
         return true;
@@ -86,7 +86,7 @@ class SectionReservation {
     List<int> tmp = [];
 
     for (int i = start; i <= end; i++) {
-      if (avaliable.contains(i)) {
+      if (available.contains(i)) {
         if (!reserved.contains(i)) {
           tmp.add(i);
           continue;
@@ -107,25 +107,25 @@ class ReservationForDate {
 
   ReservationForDate(this.date) {
     reservations = {
-      SectionName.ga: SectionReservation(SectionReservation.defaultAvaliable),
-      SectionName.na: SectionReservation(SectionReservation.defaultAvaliable),
-      SectionName.da: SectionReservation(SectionReservation.defaultAvaliable),
-      SectionName.ra: SectionReservation(SectionReservation.defaultAvaliable),
-      SectionName.ma: SectionReservation(SectionReservation.defaultAvaliable),
+      SectionName.ga: SectionReservation(SectionReservation.defaultavailable),
+      SectionName.na: SectionReservation(SectionReservation.defaultavailable),
+      SectionName.da: SectionReservation(SectionReservation.defaultavailable),
+      SectionName.ra: SectionReservation(SectionReservation.defaultavailable),
+      SectionName.ma: SectionReservation(SectionReservation.defaultavailable),
     };
   }
   ReservationForDate.testPeriod(this.date) {
     reservations = {
       SectionName.ga:
-          SectionReservation(SectionReservation.testPeriodAvaliable),
+          SectionReservation(SectionReservation.testPeriodavailable),
       SectionName.na:
-          SectionReservation(SectionReservation.testPeriodAvaliable),
+          SectionReservation(SectionReservation.testPeriodavailable),
       SectionName.da:
-          SectionReservation(SectionReservation.testPeriodAvaliable),
+          SectionReservation(SectionReservation.testPeriodavailable),
       SectionName.ra:
-          SectionReservation(SectionReservation.testPeriodAvaliable),
+          SectionReservation(SectionReservation.testPeriodavailable),
       SectionName.ma:
-          SectionReservation(SectionReservation.testPeriodAvaliable),
+          SectionReservation(SectionReservation.testPeriodavailable),
     };
   }
 }

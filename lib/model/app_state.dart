@@ -1,7 +1,6 @@
 import 'package:chungmugong_front_end/model/abusing.dart';
 import 'package:chungmugong_front_end/model/profile.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../firebase/firebase_firestore.dart';
@@ -18,6 +17,7 @@ class AppState extends ChangeNotifier {
 
   // 아래 변수는 추후 Firebase와 연결하여 초기화 되어야함
   ReservationForDate reservations = ReservationForDate(DateTime.now());
+  List<int> availableTime = SectionReservation.defaultavailable;
   List<Abusing> abusingLog = [Abusing(DateTime.now(), AbusingType.noshow)];
   List<ReservationForUser> myReservations = [
     ReservationForUser(
