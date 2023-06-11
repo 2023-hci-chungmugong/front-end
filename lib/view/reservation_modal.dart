@@ -1,3 +1,4 @@
+import 'package:chungmugong_front_end/intent/reservation_intent.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
@@ -7,9 +8,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class ReservationModal extends StatefulWidget {
-  final String name;
+  final String sectionName;
 
-  const ReservationModal({super.key, required this.name});
+  const ReservationModal({super.key, required this.sectionName});
 
   @override
   State<ReservationModal> createState() => _ReservationModalState();
@@ -21,6 +22,7 @@ class _ReservationModalState extends State<ReservationModal> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
+    // print(appState.reservations.reservations[SectionName.na]!.reserved);
 
     return Center(
       child: Container(
@@ -66,8 +68,10 @@ class _ReservationModalState extends State<ReservationModal> {
             // TODO: 아래는 더미 데이터
             PeriodGrid(
               avaliable: appState.availableTime,
-              reserved: appState.reservations
-                  .reservations[stringToSectionName(widget.name)]!.reserved,
+              reserved: appState
+                  .reservations
+                  .reservations[stringToSectionName(widget.sectionName)]!
+                  .reserved,
               clicked: clicked,
             ),
             Container(
@@ -77,6 +81,9 @@ class _ReservationModalState extends State<ReservationModal> {
               child: FilledButton(
                 onPressed: () {
                   // TODO: appState에 예약 추가하기
+                  makeReservation(
+                      stringToSectionName(widget.sectionName)!, clicked);
+                  print(clicked);
                   Navigator.pop(context);
                 },
                 style: FilledButton.styleFrom(

@@ -1,5 +1,4 @@
 import 'package:chungmugong_front_end/intent/auth.dart';
-import 'package:chungmugong_front_end/intent/fetch_data.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
