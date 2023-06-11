@@ -50,11 +50,14 @@ class FetchAppData {
     List<dynamic> abusing = data['abusing'];
     for (var ab in abusing) {
       int microTime = (ab['date'] as Timestamp).microsecondsSinceEpoch;
-
-      appState.abusingLog.add(Abusing(
-          DateTime.fromMicrosecondsSinceEpoch(microTime),
-          stringToAbusingType(ab['content'])!));
+      AbusingType abType =  stringToAbusingType(ab['content']);
+        appState.abusingLog.add(Abusing(
+            DateTime.fromMicrosecondsSinceEpoch(microTime),
+           abType));
+      print(stringToAbusingType(ab['content']).runtimeType);
     }
+    print(appState.abusingLog);
+
     // print(appState.abusingLog[0].date);
 
     appState.userData = Profile(data['name'], data['id']);

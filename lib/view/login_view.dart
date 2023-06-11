@@ -62,9 +62,7 @@ class _LoginViewState extends State<LoginView> {
               Auth.auth(id, pw).then((result) {
                 if (result) {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const WifiIn(
-                      child: LobbyView(),
-                    ),
+                    builder: (context) => LobbyView(),
                   ));
                 } else {
                   showDialog(

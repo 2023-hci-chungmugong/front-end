@@ -1,3 +1,4 @@
+import 'package:chungmugong_front_end/intent/cancel_reservation.dart';
 import 'package:chungmugong_front_end/model/abusing.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
@@ -24,9 +25,14 @@ class _DrawerViewState extends State<DrawerView> {
       child: Column(
         children: [
           SizedBox(
-            height: DesignKit.getHeight(context, 260),
+            height: DesignKit.getHeight(context, 280),
             width: DesignKit.getWidth(context, 400),
             child: DrawerHeader(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: Divider.createBorderSide(context,color:DesignKit.gray,width: 1.0)
+                )
+              ),
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,7 +41,7 @@ class _DrawerViewState extends State<DrawerView> {
                 BoldText16(appState.userData.id),
                 BoldText16(appState.userData.name),
                 SizedBox(
-                  height: DesignKit.getHeight(context, 20),
+                  height: DesignKit.getHeight(context, 10),
                 ),
                 GestureDetector(
                     onTap: () {
@@ -171,21 +177,20 @@ class _DrawerViewState extends State<DrawerView> {
                           width: DesignKit.getWidth(context, 1),
                           color: DesignKit.gray))),
               child: DrawerReservationSection()),
-          SizedBox(
-            height: DesignKit.getHeight(context, 300),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/logout.svg',
-                width: DesignKit.getWidth(context, 32),
-                height: DesignKit.getHeight(context, 40),
-              ),
-              BoldText16('로그아웃')
-            ],
-          )
+          Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/logout.svg',
+                    width: DesignKit.getWidth(context, 32),
+                    height: DesignKit.getHeight(context, 40),
+                  ),
+                  BoldText16('로그아웃')
+                ],
+              )),
         ],
       ),
     );
@@ -206,31 +211,97 @@ class DrawerReservationSection extends StatelessWidget {
               BoldText16('예약 정보가 없습니다.'),
             ],
           )
-        : Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BoldText14(dateTimeToString(appState.myReservations[0].date)),
-                  SizedBox(
-                    height: DesignKit.getHeight(context, 20),
-                  ),
-                  BoldText14(
-                      "<${sectionNameToString(appState.myReservations[0].section)}>"),
-                  BoldText14(
-                      "${appState.myReservations[0].start}:00 ~ ${appState.myReservations[0].end}:00")
-                ],
-              ),
-              SizedBox(
-                width: DesignKit.getWidth(context, 50),
-              ),
-              SvgPicture.asset(
-                'assets/icons/cancel.svg',
-                width: DesignKit.getWidth(context, 35),
-                height: DesignKit.getHeight(context, 35),
-              )
-            ],
+        : Column(
+            children: appState.myReservations
+                .asMap()
+                .map((index, ReservationForUser e) => (MapEntry(
+                    index,
+                    reservationSection(
+                        reserveDate: dateTimeToString(e.date),
+                        sectionName: sectionNameToString(e.section),
+                        start: e.start,
+                        end: e.end,
+                        idx: index))))
+                .values
+                .toList(),
           );
+  }
+}
+
+class reservationSection extends StatefulWidget {
+  const reservationSection(
+  {super.key,
+  required this.reserveDate,
+  required this.sectionName,
+  required this.start,
+  required this.end,
+  required this.idx});
+
+  final String reserveDate;
+  final String sectionName;
+  final int start;
+  final int end;
+  final int idx;
+
+  @override
+  State<reservationSection> createState() => _reservationSectionState();
+}
+
+class _reservationSectionState extends State<reservationSection> {
+
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<AppState>();
+    return (Column(children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BoldText14(widget.reserveDate),
+              SizedBox(
+                height: DesignKit.getHeight(context, 20),
+              ),
+              BoldText14("<${widget.sectionName}>"),
+              BoldText14("${widget.start}:00 ~ ${widget.end}:00")
+            ],
+          ),
+          SizedBox(
+            width: DesignKit.getWidth(context, 50),
+          ),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        content: PlainText14('해당 예약을 정말 취소하시겠습니까?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                                cancelReservation(widget.idx);
+                                Navigator.pop(context);
+                            },
+                            child: const Text('네'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('아니요'),
+                          ),
+                        ],
+                      ));
+            },
+            child: SvgPicture.asset(
+              'assets/icons/cancel.svg',
+              width: DesignKit.getWidth(context, 35),
+              height: DesignKit.getHeight(context, 35),
+            ),
+          )
+        ],
+      ),
+      SizedBox(
+        height: DesignKit.getHeight(context, 20),
+      ),
+    ]));
   }
 }
