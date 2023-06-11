@@ -1,3 +1,4 @@
+import 'package:chungmugong_front_end/intent/cancel_reservation.dart';
 import 'package:chungmugong_front_end/model/abusing.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
@@ -207,32 +208,45 @@ class DrawerReservationSection extends StatelessWidget {
           )
         : Column(
             children: appState.myReservations
-                .map<reservationSection>((ReservationForUser e) =>
-                    (reservationSection(
+                .asMap()
+                .map((index, ReservationForUser e) => (MapEntry(
+                    index,
+                    reservationSection(
                         reserveDate: dateTimeToString(e.date),
                         sectionName: sectionNameToString(e.section),
                         start: e.start,
-                        end: e.end)))
+                        end: e.end,
+                        idx: index))))
+                .values
                 .toList(),
           );
   }
 }
 
-class reservationSection extends StatelessWidget {
+class reservationSection extends StatefulWidget {
   const reservationSection(
-      {super.key,
-      required this.reserveDate,
-      required this.sectionName,
-      required this.start,
-      required this.end});
+  {super.key,
+  required this.reserveDate,
+  required this.sectionName,
+  required this.start,
+  required this.end,
+  required this.idx});
 
   final String reserveDate;
   final String sectionName;
   final int start;
   final int end;
+  final int idx;
+
+  @override
+  State<reservationSection> createState() => _reservationSectionState();
+}
+
+class _reservationSectionState extends State<reservationSection> {
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<AppState>();
     return (Column(children: [
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -240,22 +254,44 @@ class reservationSection extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BoldText14(reserveDate),
+              BoldText14(widget.reserveDate),
               SizedBox(
                 height: DesignKit.getHeight(context, 20),
               ),
-              BoldText14("<$sectionName>"),
-              BoldText14("$start:00 ~ $end:00")
+              BoldText14("<${widget.sectionName}>"),
+              BoldText14("${widget.start}:00 ~ ${widget.end}:00")
             ],
           ),
           SizedBox(
             width: DesignKit.getWidth(context, 50),
           ),
-          SvgPicture.asset(
-            'assets/icons/cancel.svg',
-            width: DesignKit.getWidth(context, 35),
-            height: DesignKit.getHeight(context, 35),
-          ),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        content: PlainText14('해당 예약을 정말 취소하시겠습니까?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                                cancelReservation(widget.idx);
+                                Navigator.pop(context);
+                            },
+                            child: const Text('네'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('아니요'),
+                          ),
+                        ],
+                      ));
+            },
+            child: SvgPicture.asset(
+              'assets/icons/cancel.svg',
+              width: DesignKit.getWidth(context, 35),
+              height: DesignKit.getHeight(context, 35),
+            ),
+          )
         ],
       ),
       SizedBox(
