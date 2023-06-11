@@ -12,12 +12,12 @@ Future<void> makeReservation(SectionName sectionName, List<int> clicked) async {
       .toList();
 
   if (intersection.isEmpty) {
-    await updateReservationForDate(sectionName, clicked);
-    await updateUserReservation(sectionName, clicked);
+    await addReservationForDate(sectionName, clicked);
+    await addUserReservation(sectionName, clicked);
 
     await FetchAppData.initializeAppData();
     await FetchAppData.updateUserData(appState.userData.id);
 
-    print(appState.reservations.reservations[SectionName.na]!.reserved);
+    // print(appState.reservations.reservations[SectionName.na]!.reserved);
   }
 }
