@@ -94,7 +94,7 @@ Future<DocumentSnapshot<Object?>> getUserData(String id) async {
   return document;
 }
 
-Future<void> updateReservationForDate(
+Future<void> addReservationForDate(
   SectionName sectionName,
   List<int> selected,
 ) async {
@@ -106,16 +106,16 @@ Future<void> updateReservationForDate(
     ...selected,
     ...appState.reservations.reservations[sectionName]!.reserved
   };
-  print(sectionName.toString());
-  print(appState.reservations.reservations[SectionName.na]!.reserved);
-  print(reservationData);
+  // print(sectionName.toString());
+  // print(appState.reservations.reservations[SectionName.na]!.reserved);
+  // print(reservationData);
   await firestore
       .collection('ReservationForDate')
       .doc(documentId)
       .update(reservationData);
 }
 
-Future<void> updateUserReservation(
+Future<void> addUserReservation(
   SectionName sectionName,
   List<int> selected,
 ) async {
@@ -134,4 +134,49 @@ Future<void> updateUserReservation(
   };
 
   await firestore.collection('user').doc(documentId).update(reservation);
+}
+
+Future<void> removeUserReservation(int idx) async {
+  AppState appState = AppState();
+  String documentId = appState.userData.id.toString();
+
+  DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+      await firestore.collection('user').doc(documentId).get();
+  Map<String, dynamic>? firebase_reservation = documentSnapshot.data();
+
+  dynamic remove_reservation =
+      (firebase_reservation!['reservations'] as List<dynamic>)[idx];
+  (firebase_reservation['reservations'] as List<dynamic>).removeAt(idx);
+
+  await firestore
+      .collection('user')
+      .doc(documentId)
+      .update(firebase_reservation);
+
+  final Map<String, dynamic> reservationData = {};
+
+  List<int> target = [];
+  for (int i = remove_reservation['startTime'];
+      i <= remove_reservation['endTime'];
+      i++) {
+    target.add(i);
+  }
+
+  reservationData[remove_reservation['sectionName']] = appState
+      .reservations
+      .reservations[stringToSectionName(remove_reservation['sectionName'])]!
+      .reserved
+      .where((e) => !target.contains(e))
+      .toList();
+
+  // print("sfsf");
+  // print(reservationData);
+  // print("sfsf");
+
+  documentId = appState.appDate.toIso8601String().split('T')[0];
+
+  await firestore
+      .collection('ReservationForDate')
+      .doc(documentId)
+      .update(reservationData);
 }
