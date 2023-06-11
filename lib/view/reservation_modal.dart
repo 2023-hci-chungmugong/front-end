@@ -81,6 +81,7 @@ class _ReservationModalState extends State<ReservationModal> {
               child: FilledButton(
                 onPressed: () {
                   // TODO: appState에 예약 추가하기
+                  clicked.sort();
                   makeReservation(
                       stringToSectionName(widget.sectionName)!, clicked);
                   print(clicked);

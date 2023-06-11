@@ -264,7 +264,7 @@ class _reservationSectionState extends State<reservationSection> {
                 height: DesignKit.getHeight(context, 20),
               ),
               BoldText14("<${widget.sectionName}>"),
-              BoldText14("${widget.start}:00 ~ ${widget.end}:00")
+              BoldText14("${widget.start}:00 ~ ${(widget.end)+1}:00")
             ],
           ),
           SizedBox(

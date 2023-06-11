@@ -65,6 +65,7 @@ class FetchAppData {
     // print(appState.userData.name);
 
     List<dynamic> reservations = data['reservations'];
+    appState.myReservations.clear();
     for (var reservation in reservations) {
       appState.myReservations.add(ReservationForUser(
         date: DateTime.now(),
