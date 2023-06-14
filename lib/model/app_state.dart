@@ -14,6 +14,8 @@ class AppState extends ChangeNotifier {
 
   // 아래에 모델(전역변수) 추가
   DateTime appDate = DateTime.now();
+  int nearestTime = 0;
+  int currentHour = DateTime.now().hour;
 
   // 아래 변수는 추후 Firebase와 연결하여 초기화 되어야함
   ReservationForDate reservations = ReservationForDate(DateTime.now());
