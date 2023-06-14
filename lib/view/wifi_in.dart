@@ -1,6 +1,6 @@
 import 'dart:async';
 
-// import 'package:chungmugong_front_end/intent/notification.dart';
+import 'package:chungmugong_front_end/intent/notification.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/view/wifi_modal.dart';
