@@ -12,12 +12,18 @@ class FetchAppData {
     DocumentSnapshot available = await getTodayAvailable();
     DocumentSnapshot reservationForDate = await getTodayReservationForDate();
 
-    print(reservationForDate.data());
+    // print(reservationForDate.data());
 
     Map<String, dynamic> data = available.data() as Map<String, dynamic>;
     List<dynamic> notParsed = data['time'];
     appState.availableTime =
         notParsed.map((e) => int.parse(e.toString())).toList();
+
+    appState.reservations.reservations[SectionName.ga]!.reserved.clear();
+    appState.reservations.reservations[SectionName.na]!.reserved.clear();
+    appState.reservations.reservations[SectionName.da]!.reserved.clear();
+    appState.reservations.reservations[SectionName.ra]!.reserved.clear();
+    appState.reservations.reservations[SectionName.ma]!.reserved.clear();
 
     Map<String, dynamic> firebaseReservations =
         reservationForDate.data() as Map<String, dynamic>;
@@ -37,7 +43,7 @@ class FetchAppData {
         (firebaseReservations["SectionName"]['ma'] as List<dynamic>)
             .map((e) => int.parse(e.toString())));
 
-    print(appState.reservations.reservations[SectionName.na]!.reserved);
+    // print(appState.reservations.reservations[SectionName.na]!.reserved);
   }
 
   static Future<void> updateUserData(String id) async {
@@ -54,9 +60,8 @@ class FetchAppData {
       AbusingType abType = stringToAbusingType(ab['content']);
       appState.abusingLog
           .add(Abusing(DateTime.fromMicrosecondsSinceEpoch(microTime), abType));
-      print(stringToAbusingType(ab['content']).runtimeType);
     }
-    print(appState.abusingLog);
+    // print(appState.abusingLog[1].type.toString());
 
     // print(appState.abusingLog[0].date);
 

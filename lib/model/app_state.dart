@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../firebase/firebase_firestore.dart';
 
 class AppState extends ChangeNotifier {
-  // 7~10라인 써주면 인스턴스가 Sigletone으로 생성됨
+  // 아래 3줄 써주면 인스턴스가 Sigletone으로 생성됨
   static final AppState _instance = AppState._internal();
 
   factory AppState() => _instance;

@@ -29,7 +29,11 @@ class _LoginViewState extends State<LoginView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(width: MediaQuery.of(context).size.width),
-          const Image(image: AssetImage('assets/images/login_logo.png')),
+          Image(
+            image: const AssetImage('assets/images/logo.png'),
+            width: DesignKit.getWidth(context, 200),
+          ),
+          SizedBox(height: DesignKit.getHeight(context, 30)),
           SizedBox(
             width: 180,
             child: Column(
@@ -62,7 +66,9 @@ class _LoginViewState extends State<LoginView> {
               Auth.auth(id, pw).then((result) {
                 if (result) {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => LobbyView(),
+                    builder: (context) => WifiIn(
+                      child: LobbyView(),
+                    ),
                   ));
                 } else {
                   showDialog(

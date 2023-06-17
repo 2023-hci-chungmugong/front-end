@@ -136,6 +136,25 @@ Future<void> addUserReservation(
   await firestore.collection('user').doc(documentId).update(reservation);
 }
 
+Future<void> forceUpdateUserReservation() async {
+  AppState appState = AppState();
+  String documentId = appState.userData.id.toString();
+
+  List<Map<String, dynamic>> reservations = appState.myReservations
+      .map((e) => {
+            'sectionName': e.section.toString(),
+            'startTime': e.start,
+            'endTime': e.end,
+            'status': e.status.toString(),
+          })
+      .toList();
+
+  await firestore
+      .collection('user')
+      .doc(documentId)
+      .set({'reservations': reservations}, SetOptions(merge: true));
+}
+
 Future<void> removeUserReservation(int idx) async {
   AppState appState = AppState();
   String documentId = appState.userData.id.toString();

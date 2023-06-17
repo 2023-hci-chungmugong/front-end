@@ -1,3 +1,4 @@
+import 'package:chungmugong_front_end/intent/entry_reservation.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
@@ -8,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class WifiModal extends StatefulWidget {
-  const WifiModal({super.key});
+  final int idx;
+  const WifiModal({super.key, required this.idx});
 
   @override
   State<WifiModal> createState() => _WifiModal();
@@ -52,15 +54,15 @@ class _WifiModal extends State<WifiModal> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BoldText14(
-                        dateTimeToString(appState.myReservations[0].date)),
+                    BoldText14(dateTimeToString(
+                        appState.myReservations[widget.idx].date)),
                     SizedBox(
                       height: DesignKit.getHeight(context, 20),
                     ),
                     BoldText14(
-                        "<${sectionNameToString(appState.myReservations[0].section)}>"),
+                        "<${sectionNameToString(appState.myReservations[widget.idx].section)}>"),
                     BoldText14(
-                        "${appState.myReservations[0].start}:00 ~ ${appState.myReservations[0].end}:00")
+                        "${appState.myReservations[widget.idx].start}:00 ~ ${appState.myReservations[widget.idx].end + 1}:00")
                   ],
                 ),
                 // SizedBox(height: DesignKit.getHeight(context, 30)),
@@ -91,6 +93,7 @@ class _WifiModal extends State<WifiModal> {
               child: FilledButton(
                 onPressed: () {
                   // appState 예약상태 변경 => inherited ㅠㅠ
+                  entryReservation();
                   Navigator.pop(context);
                 },
                 style: FilledButton.styleFrom(
