@@ -4,7 +4,6 @@ import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/util/util.dart';
-import 'package:chungmugong_front_end/view/wifi_in.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +19,7 @@ class _WifiModal extends State<WifiModal> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
-    // TODO: implement build
+
     return Center(
       child: Container(
         width: DesignKit.getWidth(context, 300),
@@ -66,7 +65,7 @@ class _WifiModal extends State<WifiModal> {
                   ],
                 ),
                 // SizedBox(height: DesignKit.getHeight(context, 30)),
-                Column(
+                const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
@@ -141,7 +140,7 @@ class EntrySection extends StatelessWidget {
                     section
                 ? DesignKit.green
                 : DesignKit.gray),
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
           ),
         )
       ],

@@ -65,7 +65,6 @@ class _ReservationModalState extends State<ReservationModal> {
                 ),
               ],
             ),
-            // TODO: 아래는 더미 데이터
             PeriodGrid(
               avaliable: appState.availableTime,
               reserved: appState
@@ -80,11 +79,10 @@ class _ReservationModalState extends State<ReservationModal> {
               ),
               child: FilledButton(
                 onPressed: () {
-                  // TODO: appState에 예약 추가하기
                   clicked.sort();
                   makeReservation(
                       stringToSectionName(widget.sectionName)!, clicked);
-                  print(clicked);
+                  // print(clicked);
                   Navigator.pop(context);
                 },
                 style: FilledButton.styleFrom(
@@ -111,11 +109,11 @@ class _ReservationModalState extends State<ReservationModal> {
 }
 
 class PeriodGrid extends StatefulWidget {
-  List<int> avaliable;
-  List<int> reserved;
-  List<int> clicked;
+  final List<int> avaliable;
+  final List<int> reserved;
+  final List<int> clicked;
 
-  PeriodGrid(
+  const PeriodGrid(
       {super.key,
       required this.avaliable,
       required this.reserved,

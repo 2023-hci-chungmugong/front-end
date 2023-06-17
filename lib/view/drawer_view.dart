@@ -48,7 +48,7 @@ class _DrawerViewState extends State<DrawerView> {
                           showDialog(
                               context: context,
                               builder: (BuildContext context) => AlertDialog(
-                                    title: Text(
+                                    title: const Text(
                                       '부정 사용 기록',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -59,10 +59,10 @@ class _DrawerViewState extends State<DrawerView> {
                                             DesignKit.getHeight(context, 140),
                                         child: Column(
                                           children: [
-                                            (appState.abusingLog.length > 0
+                                            (appState.abusingLog.isNotEmpty
                                                 ? PlainText14(
                                                     "${getAbusingMessage(appState.abusingLog[0].type)} - ${dateTimeToString2(appState.abusingLog[0].date)}")
-                                                : PlainText14(
+                                                : const PlainText14(
                                                     '첫 번째 부정 이용이 없습니다.',
                                                     textColor: DesignKit.gray,
                                                   )),
@@ -72,7 +72,7 @@ class _DrawerViewState extends State<DrawerView> {
                                             (appState.abusingLog.length > 1
                                                 ? PlainText14(
                                                     "${getAbusingMessage(appState.abusingLog[1].type)} - ${dateTimeToString2(appState.abusingLog[1].date)}")
-                                                : PlainText14(
+                                                : const PlainText14(
                                                     '두 번째 부정 이용이 없습니다.',
                                                     textColor: DesignKit.gray,
                                                   )),
@@ -82,7 +82,7 @@ class _DrawerViewState extends State<DrawerView> {
                                             (appState.abusingLog.length > 2
                                                 ? PlainText14(
                                                     "${getAbusingMessage(appState.abusingLog[2].type)} - ${dateTimeToString2(appState.abusingLog[2].date)}")
-                                                : PlainText14(
+                                                : const PlainText14(
                                                     '세 번째 부정 이용이 없습니다.',
                                                     textColor: DesignKit.gray,
                                                   )),
@@ -94,7 +94,7 @@ class _DrawerViewState extends State<DrawerView> {
                                           showDialog(
                                               context: context,
                                               builder: (BuildContext context) =>
-                                                  AlertDialog(
+                                                  const AlertDialog(
                                                     title: Text(
                                                       '패널티란?',
                                                       textAlign:
@@ -108,7 +108,7 @@ class _DrawerViewState extends State<DrawerView> {
                                                         '부정이용은 예약 후 입장하지 않거나, 자리를 오래 비우는 것을 의미합니다. 패널티를 받았다면 부정이용 정보는 초기화됩니다.'),
                                                   ));
                                         },
-                                        child: Center(
+                                        child: const Center(
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
@@ -137,7 +137,7 @@ class _DrawerViewState extends State<DrawerView> {
                               margin: EdgeInsets.only(
                                   right: DesignKit.getWidth(context, 7)),
                               decoration: BoxDecoration(
-                                color: (appState.abusingLog.length > 0
+                                color: (appState.abusingLog.isNotEmpty
                                     ? DesignKit.yellow
                                     : DesignKit.gray),
                                 borderRadius: BorderRadius.circular(5),
@@ -179,7 +179,7 @@ class _DrawerViewState extends State<DrawerView> {
                       bottom: BorderSide(
                           width: DesignKit.getWidth(context, 1),
                           color: DesignKit.gray))),
-              child: DrawerReservationSection()),
+              child: const DrawerReservationSection()),
           Expanded(
               flex: 1,
               child: Column(
@@ -194,21 +194,23 @@ class _DrawerViewState extends State<DrawerView> {
                           width: DesignKit.getWidth(context, 32),
                           height: DesignKit.getHeight(context, 40),
                         ),
-                        BoldText16('로그아웃')
+                        const BoldText16('로그아웃')
                       ],
                     ),
                     onTap: () {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                                content: PlainText14('정말 로그아웃 하시겠습니까?'),
+                                content: const PlainText14('정말 로그아웃 하시겠습니까?'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => LoginView(),
-                                      ));
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginView(),
+                                        ),
+                                      );
                                     },
                                     child: const Text('네'),
                                   ),
@@ -235,7 +237,7 @@ class DrawerReservationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
     return appState.myReservations.isEmpty
-        ? Row(
+        ? const Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -247,7 +249,7 @@ class DrawerReservationSection extends StatelessWidget {
                 .asMap()
                 .map((index, ReservationForUser e) => (MapEntry(
                     index,
-                    reservationSection(
+                    ReservationSection(
                         reserveDate: dateTimeToString(e.date),
                         sectionName: sectionNameToString(e.section),
                         start: e.start,
@@ -259,8 +261,8 @@ class DrawerReservationSection extends StatelessWidget {
   }
 }
 
-class reservationSection extends StatefulWidget {
-  const reservationSection(
+class ReservationSection extends StatefulWidget {
+  const ReservationSection(
       {super.key,
       required this.reserveDate,
       required this.sectionName,
@@ -275,13 +277,12 @@ class reservationSection extends StatefulWidget {
   final int idx;
 
   @override
-  State<reservationSection> createState() => _reservationSectionState();
+  State<ReservationSection> createState() => _ReservationSectionState();
 }
 
-class _reservationSectionState extends State<reservationSection> {
+class _ReservationSectionState extends State<ReservationSection> {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<AppState>();
     return (Column(children: [
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -305,12 +306,12 @@ class _reservationSectionState extends State<reservationSection> {
               showDialog(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
-                        content: PlainText14('해당 예약을 정말 취소하시겠습니까?'),
+                        content: const PlainText14('해당 예약을 정말 취소하시겠습니까?'),
                         actions: [
                           TextButton(
                             onPressed: () async {
-                              await cancelReservation(widget.idx);
-                              Navigator.pop(context);
+                              await cancelReservation(widget.idx)
+                                  .then((value) => Navigator.pop(context));
                             },
                             child: const Text('네'),
                           ),

@@ -1,4 +1,3 @@
-import 'package:chungmugong_front_end/intent/local_notification.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
@@ -24,13 +23,13 @@ class _LobbyBodyState extends State<LobbyBody> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: DesignKit.getHeight(context, 80)),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [TableItem('가'), TableItem('나'), TableItem('다')],
+              children: [TableItem('가'), TableItem('나'), TableItem('다')],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [TableItem('라'), TableItem('마')],
+              children: [TableItem('라'), TableItem('마')],
             ),
           ],
         ),
@@ -53,7 +52,6 @@ class _TableItemState extends State<TableItem> {
     List<int> checker = List.from(available);
     checker.removeWhere((e) => reserved.contains(e) || e < now.hour);
 
-    print(checker);
     if (checker.isEmpty) {
       return DesignKit.red;
     } else if (checker[0] != now.hour) {
@@ -63,7 +61,6 @@ class _TableItemState extends State<TableItem> {
     }
   }
 
-  // TODO: 색깔 및 텍스트 표현
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
@@ -87,7 +84,7 @@ class _TableItemState extends State<TableItem> {
               appState.reservations
                   .reservations[stringToSectionName(widget.name)]!.reserved,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: const [
               BoxShadow(
                 color: Colors.black38,

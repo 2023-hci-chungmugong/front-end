@@ -1,12 +1,10 @@
 import 'dart:async';
-
-// import 'package:chungmugong_front_end/intent/notification.dart';
 import 'package:chungmugong_front_end/intent/local_notification.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/view/wifi_modal.dart';
 import 'package:flutter/material.dart';
-import 'package:network_info_plus/network_info_plus.dart';
+// import 'package:network_info_plus/network_info_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -22,13 +20,13 @@ class WifiIn extends StatefulWidget {
   const WifiIn({Key? key, required this.child}) : super(key: key);
 
   @override
-  _WifiIn createState() => _WifiIn();
+  State<WifiIn> createState() => _WifiIn();
 }
 
 class _WifiIn extends State<WifiIn> with ChangeNotifier {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-  static const String CMGWifiIP = '10.0.2.16';
+  // static const String CMGWifiIP = '10.0.2.16';
   // static const String CMGWifiBSSID = 'AndroidWifi';
   late Timer _timer;
 
@@ -59,9 +57,8 @@ class _WifiIn extends State<WifiIn> with ChangeNotifier {
     super.dispose();
   }
 
-  @override
   void _start() {
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       // 시간 모니터링, 5초마다
 
       currentHour = DateTime.now().hour;
@@ -111,8 +108,8 @@ class _WifiIn extends State<WifiIn> with ChangeNotifier {
             appState.myReservations[idx].status == ReservationStatus.using) {
           _connectivitySubscription = _connectivity.onConnectivityChanged
               .listen((ConnectivityResult result) async {
-            final info = NetworkInfo();
-            final wifiIP = await info.getWifiIP();
+            // final info = NetworkInfo();
+            // final wifiIP = await info.getWifiIP();
             //지정한 와이파이랑 연결이 다름
             if (result == ConnectivityResult.mobile) {
               //여기에 푸시알림

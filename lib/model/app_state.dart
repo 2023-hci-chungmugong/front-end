@@ -3,8 +3,6 @@ import 'package:chungmugong_front_end/model/profile.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:flutter/material.dart';
 
-import '../firebase/firebase_firestore.dart';
-
 class AppState extends ChangeNotifier {
   // 아래 3줄 써주면 인스턴스가 Sigletone으로 생성됨
   static final AppState _instance = AppState._internal();

@@ -1,12 +1,10 @@
 import 'package:chungmugong_front_end/model/app_state.dart';
-import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
 import 'package:chungmugong_front_end/util/styled_component.dart';
 import 'package:chungmugong_front_end/util/util.dart';
 import 'package:chungmugong_front_end/view/lobby_body.dart';
 import 'package:chungmugong_front_end/view/drawer_view.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class LobbyView extends StatelessWidget {
@@ -30,11 +28,11 @@ class LobbyView extends StatelessWidget {
                 '${today.year}년 ${today.month}월 ${today.day}일 (${weekDayToString(today.weekday)})',
                 textColor: Colors.white,
               ),
-              actions: [],
+              actions: const [],
             ),
           ),
-          endDrawer: DrawerView(),
-          body: LobbyBody(),
+          endDrawer: const DrawerView(),
+          body: const LobbyBody(),
         ),
         onWillPop: () async => false);
   }
