@@ -18,6 +18,12 @@ Future<void> makeReservation(SectionName sectionName, List<int> clicked) async {
     await FetchAppData.initializeAppData();
     await FetchAppData.updateUserData(appState.userData.id);
 
+    appState.myReservations.sort((a, b) => a.start.compareTo(b.start));
+
+    forceUpdateUserReservation();
+
+    appState.notifyListeners();
+
     // print(appState.reservations.reservations[SectionName.na]!.reserved);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:chungmugong_front_end/intent/fetch_data.dart';
+import 'package:chungmugong_front_end/intent/local_notification.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/view/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,6 +14,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FetchAppData.initializeAppData();
+
+  LocalNotification.initialize();
 
   runApp(const MyApp());
 }
