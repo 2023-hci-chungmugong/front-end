@@ -85,13 +85,13 @@ class _WifiIn extends State<WifiIn> with ChangeNotifier {
           }
         }
         //가까운 start 시간에 reserved인 경우
-        print(appState.nearestTime);
+        // print(appState.nearestTime);
         if ((appState.myReservations.isNotEmpty) &&
             (appState.nearestTime == currentHour) &&
             (appState.myReservations[idx].status ==
                 ReservationStatus.reserved)) {
           //가장 가까운 예약 start가 지금 시간이 됐으면 푸시
-          print("!@@#!#!@");
+          // print("!@@#!#!@");
           _connectivitySubscription = _connectivity.onConnectivityChanged
               .listen((ConnectivityResult result) {
             int tmp = appState.myReservations.length;
@@ -116,7 +116,7 @@ class _WifiIn extends State<WifiIn> with ChangeNotifier {
             //지정한 와이파이랑 연결이 다름
             if (result == ConnectivityResult.mobile) {
               //여기에 푸시알림
-              print('hi');
+              // print('hi');
               LocalNotification.testNotification();
             }
           });
