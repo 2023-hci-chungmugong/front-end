@@ -1,3 +1,4 @@
+import 'package:chungmugong_front_end/intent/local_notification.dart';
 import 'package:chungmugong_front_end/model/app_state.dart';
 import 'package:chungmugong_front_end/model/reservation.dart';
 import 'package:chungmugong_front_end/util/design_kit.dart';
@@ -16,6 +17,8 @@ class LobbyBody extends StatefulWidget {
 class _LobbyBodyState extends State<LobbyBody> {
   @override
   Widget build(BuildContext context) {
+    LocalNotification.testSchedule(18);
+    // LocalNotification.testNotification();
     return Column(
       children: [
         const LobbyBodyInfo(),

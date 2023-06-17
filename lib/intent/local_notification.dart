@@ -48,13 +48,13 @@ class LocalNotification {
 
     await _localNotification.show(
       0,
-      '충무공 - 충남대무한상상공간 예약서비스',
+      '충무공 - 충남대 무한상상공간 예약서비스',
       '예약 시간이 임박하였습니다. 입장을 완료해주세요.',
       notiDetails,
     );
   }
 
-  static Future<void> testSchedule() async {
+  static Future<void> testSchedule(int hour) async {
     const AndroidNotificationDetails android =
         AndroidNotificationDetails('channelId', 'Name');
     const NotificationDetails notiDetails = NotificationDetails(
@@ -63,10 +63,13 @@ class LocalNotification {
       1,
       'Schedule!',
       'EZ',
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      tz.TZDateTime(tz.local, DateTime.now().year, DateTime.now().month,
+          DateTime.now().day, hour, 0),
+      // tz.TZDateTime.from(other, location),
       notiDetails,
       uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.wallClockTime,
+          UILocalNotificationDateInterpretation.absoluteTime,
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
     );
   }
 

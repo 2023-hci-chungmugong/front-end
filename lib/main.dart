@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:logger/logger.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   var logger = Logger();
@@ -15,6 +16,7 @@ void main() async {
   await Firebase.initializeApp();
   await FetchAppData.initializeAppData();
 
+  tz.initializeTimeZones();
   LocalNotification.initialize();
 
   runApp(const MyApp());

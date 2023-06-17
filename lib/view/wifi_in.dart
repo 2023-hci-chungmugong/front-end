@@ -93,6 +93,7 @@ class _WifiIn extends State<WifiIn> with ChangeNotifier {
               .listen((ConnectivityResult result) {
             int tmp = appState.myReservations.length;
             if (tmp != 0) {
+              LocalNotification.testNotification();
               showDialog<void>(
                   context: context,
                   builder: (context) {
